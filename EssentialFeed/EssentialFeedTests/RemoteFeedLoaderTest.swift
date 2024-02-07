@@ -17,35 +17,37 @@ class RemoteFeedLoaderTest: XCTestCase {
     }
     
     func test_load_requestsDataFromURL() {
-        //Arrage
+        //Arrage 1
         let url = URL(string: "https://a-given-url.com")!
         let (sut, client) = makeSUT(url: url)
         
-        //Act
+        //Act 2
         sut.load { _ in }
         
-        //Assert
+        //Assert 3
         XCTAssertEqual(client.requestedURLs, [url])
     }
     
     func test_loadTwice_requestsDataFromURLTwice() {
-        //Arrage
+        //Arrage 1
         let url = URL(string: "https://a-given-url.com")!
         let (sut, client) = makeSUT(url: url)
         
-        //Act
+        //Act 2
         sut.load { _ in }
         sut.load { _ in }
         
-        //Assert
+        //Assert 3
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
     func test_load_deliversErrorOnClientError() {
-        //Arrage
+        //Arrage 1
         let (sut, client) = makeSUT()
         
+        //Assert 3
         expect(sut, toCompleteWithError: .connectivity) {
+            //Act 2
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         }
@@ -53,25 +55,26 @@ class RemoteFeedLoaderTest: XCTestCase {
     }
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
-        //Arrage
+        //Arrage 1
         let (sut, client) = makeSUT()
-        
         let samples = [199, 201, 300, 400, 500]
         
         samples.enumerated().forEach { index, code in
-            //Act
+            //Assert 3
             expect(sut, toCompleteWithError: .invalidData) {
+                //Act 2
                 client.complete(withStatusCode: code, at: index)
             }
         }
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+        //Arrage 1
         let (sut, client) = makeSUT()
         
-        //Assert
+        //Assert 3
         expect(sut, toCompleteWithError: .invalidData) {
-            //Act
+            //Act 2
             let invalidJSON = Data(_: "invalid json".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
         }
