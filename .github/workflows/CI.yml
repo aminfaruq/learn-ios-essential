@@ -11,8 +11,6 @@ jobs:
 
     runs-on: macos-14.1.2
 
-    timeout-minutes: 8
-
     steps:
     - uses: actions/checkout@v4
 
