@@ -8,14 +8,10 @@
 import Foundation
 
 public final class LocalFeedLoader {
-    
     private let store: FeedStore
     private let currentDate: () -> Date
     private let calendar = Calendar(identifier: .gregorian)
-    
-    public typealias SaveResult = Error?
-    public typealias LoadResult = LoadFeedResult
-    
+        
     public init(store: FeedStore, currentDate: @escaping() -> Date) {
         self.store = store
         self.currentDate = currentDate
@@ -35,7 +31,8 @@ public final class LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
-    
+    public typealias SaveResult = Error?
+
     public func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         self.store.deleteCachedFeed() { [weak self] error in
             guard let self = self else { return }
@@ -58,7 +55,8 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader: FeedLoader {
-    
+    public typealias LoadResult = LoadFeedResult
+
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
@@ -67,7 +65,8 @@ extension LocalFeedLoader: FeedLoader {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(feed, timestamp) where self.validate(timestamp):                completion(.success(feed.toModels()))
+            case let .found(feed, timestamp) where self.validate(timestamp):
+                completion(.success(feed.toModels()))
                 
             case .found, .empty:
                 completion(.success([]))
