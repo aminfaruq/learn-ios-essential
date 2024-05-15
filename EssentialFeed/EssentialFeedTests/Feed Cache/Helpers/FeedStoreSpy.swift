@@ -2,7 +2,7 @@
 //  FeedStoreSpy.swift
 //  EssentialFeedTests
 //
-//  Created by Phincon on 06/05/24.
+//  Created by Amin Faruq on 06/05/24.
 //
 
 import Foundation

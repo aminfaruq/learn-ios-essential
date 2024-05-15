@@ -2,7 +2,7 @@
 //  FeedCachePolicy.swift
 //  EssentialFeed
 //
-//  Created by Phincon on 15/05/24.
+//  Created by Amin Faruq on 15/05/24.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  FeedStore.swift
 //  EssentialFeed
 //
-//  Created by Phincon on 02/05/24.
+//  Created by Amin Faruq on 02/05/24.
 //
 
 import Foundation

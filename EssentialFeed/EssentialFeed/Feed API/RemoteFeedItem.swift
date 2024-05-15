@@ -2,7 +2,7 @@
 //  RemoteFeedItem.swift
 //  EssentialFeed
 //
-//  Created by Phincon on 05/05/24.
+//  Created by Amin Faruq on 05/05/24.
 //
 
 import Foundation
