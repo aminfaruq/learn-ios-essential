@@ -139,6 +139,8 @@ final class CodableFeedStoreTests: XCTestCase {
         let sut = makeSUT()
         let feed = uniqueImageFeed().local
         let timestamp = Date()
+        
+        
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.insert(feed, timestamp: timestamp) { insertionError in
@@ -149,7 +151,7 @@ final class CodableFeedStoreTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
         
-        expect(sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
+        expect(sut, toRetrieveTwice: .found(feed: feed, timestamp: timestamp))
     }
     
     //- MARK: - Helpers
@@ -158,6 +160,11 @@ final class CodableFeedStoreTests: XCTestCase {
         let sut = CodableFeedStore(storeURL: testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func expect(_ sut: CodableFeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
     private func expect(_ sut: CodableFeedStore, toRetrieve expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
