@@ -48,7 +48,7 @@ class CodableFeedStore {
         self.storeURL = storeURL
     }
     
-    func retrive(completion: @escaping FeedStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
         }
@@ -86,7 +86,7 @@ final class CodableFeedStoreTests: XCTestCase {
         let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrive")
         
-        sut.retrive { result in
+        sut.retrieve { result in
             switch result {
             case .empty: break
                 
@@ -103,8 +103,8 @@ final class CodableFeedStoreTests: XCTestCase {
         let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrive")
         
-        sut.retrive { firstResult in
-            sut.retrive { secondResult in
+        sut.retrieve { firstResult in
+            sut.retrieve { secondResult in
                 switch (firstResult, secondResult) {
                 case (.empty, .empty):
                     break
@@ -129,7 +129,7 @@ final class CodableFeedStoreTests: XCTestCase {
         sut.insert(feed, timestamp: timestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
             
-            sut.retrive { retriveResult in
+            sut.retrieve { retriveResult in
                 switch retriveResult {
                 case let .found(retrievedFeed, retrievedTimestamp):
                     XCTAssertEqual(retrievedFeed, feed)
@@ -155,8 +155,8 @@ final class CodableFeedStoreTests: XCTestCase {
         sut.insert(feed, timestamp: timestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
             
-            sut.retrive { firstResult in
-                sut.retrive { secondResult in
+            sut.retrieve { firstResult in
+                sut.retrieve { secondResult in
                     switch (firstResult, secondResult) {
                     case let (.found(firstRound), .found(secondRound)):
                         XCTAssertEqual(firstRound.feed, feed)
