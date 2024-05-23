@@ -1,6 +1,6 @@
 # Essential Feed App – Image Feed Feature
 
-![CI Status](https://github.com/aminfaruq/learn-ios-essential/actions/workflows/CI.yml/badge.svg)
+[![CI](https://github.com/aminfaruq/learn-ios-essential/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/aminfaruq/learn-ios-essential/actions/workflows/CI.yml)
 
 ## BDD Specs
 
