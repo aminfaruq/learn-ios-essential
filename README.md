@@ -1,7 +1,8 @@
 # Essential Feed App – Image Feed Feature
 
 [![CI](https://github.com/aminfaruq/learn-ios-essential/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/aminfaruq/learn-ios-essential/actions/workflows/CI.yml)
-
+[![DeepSource](https://app.deepsource.com/gh/aminfaruq/learn-ios-essential.svg/?label=active+issues&show_trend=true&token=Jx8F5jrs5B6YOCy1T7a6Ts5Y)](https://app.deepsource.com/gh/aminfaruq/learn-ios-essential/)
+[![DeepSource](https://app.deepsource.com/gh/aminfaruq/learn-ios-essential.svg/?label=resolved+issues&show_trend=true&token=Jx8F5jrs5B6YOCy1T7a6Ts5Y)](https://app.deepsource.com/gh/aminfaruq/learn-ios-essential/)
 ## BDD Specs
 
 ### Story: Customer requests to see their image feed
