@@ -142,17 +142,25 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view0?.renderedImage, .none, "Expected no image for first view while loading first image")
         XCTAssertEqual(view1?.renderedImage, .none, "Expected no image for second view while loading second image")
         
-        let imageData0 = UIImage.make(withColor: .red).pngData()!
-        loader.completeImageLoading(with: imageData0, at: 0)
-        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected image for first view once first image loading completes successfully")
+        guard let image0 = UIImage.make(withColor: .red, size: CGSize(width: 3, height: 3)),
+              let image0Data = image0.pngData() else {
+            XCTFail("Expected valid image for the first view")
+            return
+        }
+        loader.completeImageLoading(with: image0Data, at: 0)
+        XCTAssertEqual(view0?.feedImageView.image?.pngData(), image0Data, "Expected image for first view once first image loading completes successfully")
         XCTAssertEqual(view1?.renderedImage, .none, "Expected no image state change for second view once first image loading completes successfully")
         
-        let imageData1 = UIImage.make(withColor: .blue).pngData()!
-        loader.completeImageLoading(with: imageData1, at: 1)
-        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected no image state change for first view once second image loading completes successfully")
-        XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
+        guard let image1 = UIImage.make(withColor: .blue, size: CGSize(width: 3, height: 3)),
+              let image1Data = image1.pngData() else {
+            XCTFail("Expected valid image for the second view")
+            return
+        }
+        loader.completeImageLoading(with: image1Data, at: 1)
+        XCTAssertEqual(view0?.feedImageView.image?.pngData(), image0Data, "Expected no image state change for first view once second image loading completes successfully")
+        XCTAssertEqual(view1?.feedImageView.image?.pngData(), image1Data, "Expected image for second view once second image loading completes successfully")
     }
-    
+
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
@@ -164,7 +172,10 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view while loading first image")
         XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action for second view while loading second image")
         
-        let imageData = UIImage.make(withColor: .red).pngData()!
+        guard let imageData = UIImage.make(withColor: .red)?.pngData() else {
+            XCTFail("Expected valid image data for the first image")
+            return
+        }
         loader.completeImageLoading(with: imageData, at: 0)
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action for first view once first image loading completes successfully")
         XCTAssertEqual(view1?.isShowingRetryAction, false, "Expected no retry action state change for second view once first image loading completes successfully")
@@ -378,14 +389,13 @@ private extension FeedViewController {
 }
 
 private extension UIImage {
-    static func make(withColor color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
+    static func make(withColor color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        
+        color.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+        
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
