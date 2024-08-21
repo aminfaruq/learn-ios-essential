@@ -62,7 +62,6 @@
 		83E5A30C2B76C993008AE4B5 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833D54882B726A540006B7F8 /* EssentialFeed.framework */; };
 		83E5A3122B76D403008AE4B5 /* XCTTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5A2FF2B765F43008AE4B5 /* XCTTestCase+MemoryLeakTracking.swift */; };
 		83EC305C2B739FDD0099F65C /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EC305B2B739FDD0099F65C /* RemoteFeedLoader.swift */; };
-		83F7D60B2C6E355F003923F7 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7D60A2C6E355F003923F7 /* FeedViewModel.swift */; };
 		83F7D60D2C6E37EC003923F7 /* FeedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F7D60C2C6E37EC003923F7 /* FeedImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -184,7 +183,6 @@
 		83E5A30A2B76C993008AE4B5 /* EssentialFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		83E5A3132B7723D3008AE4B5 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI.xctestplan; sourceTree = "<group>"; };
 		83EC305B2B739FDD0099F65C /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
-		83F7D60A2C6E355F003923F7 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		83F7D60C2C6E37EC003923F7 /* FeedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,7 +286,6 @@
 		36CA3EA32C75C37F00C3F279 /* Feed Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				83F7D60A2C6E355F003923F7 /* FeedViewModel.swift */,
 				83F7D60C2C6E37EC003923F7 /* FeedImageViewModel.swift */,
 				36CA3EA42C75CCCE00C3F279 /* FeedPresenter.swift */,
 			);
@@ -808,7 +805,6 @@
 				8313D9A62C5D1CFC00C0A50E /* FeedImageCell.swift in Sources */,
 				83F7D60D2C6E37EC003923F7 /* FeedImageViewModel.swift in Sources */,
 				838B5A1F2C6D07630040F398 /* FeedImageCellController.swift in Sources */,
-				83F7D60B2C6E355F003923F7 /* FeedViewModel.swift in Sources */,
 				838B5A222C6D0C720040F398 /* FeedUIComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1147,6 +1143,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1185,6 +1182,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
