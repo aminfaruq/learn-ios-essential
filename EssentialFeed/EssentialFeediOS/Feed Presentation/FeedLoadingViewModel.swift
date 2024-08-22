@@ -2,7 +2,7 @@
 //  FeedLoadingViewModel.swift
 //  EssentialFeediOS
 //
-//  Created by Phincon on 21/08/24.
+//  Created by Amin faruq on 21/08/24.
 //
 
 struct FeedLoadingViewModel {
