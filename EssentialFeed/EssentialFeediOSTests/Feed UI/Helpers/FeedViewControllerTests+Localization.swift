@@ -2,7 +2,7 @@
 //  FeedViewControllerTests+Localization.swift
 //  EssentialFeediOSTests
 //
-//  Created by Phincon on 26/08/24.
+//  Created by Amin faruq on 26/08/24.
 //
 
 import Foundation

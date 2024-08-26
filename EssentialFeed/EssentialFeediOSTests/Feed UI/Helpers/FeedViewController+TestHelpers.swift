@@ -2,7 +2,7 @@
 //  FeedViewController+TestHelpers.swift
 //  EssentialFeediOSTests
 //
-//  Created by Phincon on 23/08/24.
+//  Created by Amin faruq on 23/08/24.
 //
 
 import UIKit
