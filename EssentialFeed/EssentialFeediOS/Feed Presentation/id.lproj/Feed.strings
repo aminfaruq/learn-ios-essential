@@ -6,3 +6,4 @@
   
 */
 "FEED_VIEW_TITLE" = "Feed Saya";
+"FEED_VIEW_CONNECTION_ERROR" = "Tidak bisa terhubung dengan server";
