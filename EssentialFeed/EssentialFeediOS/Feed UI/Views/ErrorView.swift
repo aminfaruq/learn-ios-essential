@@ -14,7 +14,6 @@ public final class ErrorView: UIView {
         set { setMessageAnimated(newValue) }
     }
     
-    // Initialize any UI elements here, like a label or button
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -22,22 +21,34 @@ public final class ErrorView: UIView {
         return label
     }()
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
     public override func awakeFromNib() {
         super.awakeFromNib()
-        
         setupView()
-        messageLabel.text = nil
-        alpha = 0
     }
     
     private func setupView() {
         addSubview(messageLabel)
         setupConstraints()
+        alpha = 0
+        messageLabel.text = nil
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideMessageAnimated))
+        addGestureRecognizer(tap)
     }
     
     private func setupConstraints() {
         messageLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20) // Adjust the inset as needed
+            make.edges.equalToSuperview().inset(20)
         }
     }
     
@@ -61,7 +72,7 @@ public final class ErrorView: UIView {
         }
     }
     
-    private func hideMessageAnimated() {
+    @objc private func hideMessageAnimated() {
         UIView.animate(
             withDuration: 0.25,
             animations: { self.alpha = 0 },
