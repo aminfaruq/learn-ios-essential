@@ -9,7 +9,10 @@ import UIKit
 import SnapKit
 
 public final class ErrorView: UIView {
-    public var message: String?
+    public var message: String? {
+        get { return isVisible ? messageLabel.text : nil }
+        set { setMessageAnimated(newValue) }
+    }
     
     // Initialize any UI elements here, like a label or button
     private let messageLabel: UILabel = {
@@ -19,18 +22,15 @@ public final class ErrorView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
         setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
+        messageLabel.text = nil
+        alpha = 0
     }
     
     private func setupView() {
-        messageLabel.text = message
         addSubview(messageLabel)
         setupConstraints()
     }
@@ -39,5 +39,34 @@ public final class ErrorView: UIView {
         messageLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(20) // Adjust the inset as needed
         }
+    }
+    
+    private var isVisible: Bool {
+        return alpha > 0
+    }
+    
+    private func setMessageAnimated(_ message: String?) {
+        if let message = message {
+            showAnimated(message)
+        } else {
+            hideMessageAnimated()
+        }
+    }
+    
+    private func showAnimated(_ message: String) {
+        messageLabel.text = message
+        
+        UIView.animate(withDuration: 0.25) {
+            self.alpha = 1
+        }
+    }
+    
+    private func hideMessageAnimated() {
+        UIView.animate(
+            withDuration: 0.25,
+            animations: { self.alpha = 0 },
+            completion: { completed in
+                if completed { self.messageLabel.text = nil }
+            })
     }
 }
