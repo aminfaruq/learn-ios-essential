@@ -6,9 +6,40 @@
 //
 
 import UIKit
+import SnapKit
 
 public final class ErrorView: UIView {
     public var message: String?
+    
+    // Initialize any UI elements here, like a label or button
+    private let messageLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .red
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        messageLabel.text = message
+        addSubview(messageLabel)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        messageLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(20) // Adjust the inset as needed
+        }
+    }
 }
 
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, FeedErrorView {
@@ -24,12 +55,19 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
         self.refreshController = refreshController
     }
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    private func registerTableView() {
+        errorView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        tableView.tableHeaderView = errorView
         tableView.register(FeedImageCell.self, forCellReuseIdentifier: "FeedImageCell")
+        tableView.tableHeaderView?.contentMode = .scaleToFill
         tableView.dataSource = self
         tableView.delegate = self
         tableView.prefetchDataSource = self
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        registerTableView()
         refreshControl = refreshController?.view
         refreshController?.refresh()
     }
