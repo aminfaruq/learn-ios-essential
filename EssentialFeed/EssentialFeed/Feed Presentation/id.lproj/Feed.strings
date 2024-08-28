@@ -1,0 +1,9 @@
+/* 
+  Feed.strings
+  EssentialFeed
+
+  Created by Amin faruq on 28/08/24.
+  
+*/
+"FEED_VIEW_TITLE" = "Feed Saya";
+"FEED_VIEW_CONNECTION_ERROR" = "Tidak bisa terhubung dengan server";
